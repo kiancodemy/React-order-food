@@ -14,9 +14,11 @@ function App() {
 
   return (
     <Fragment>
-      <Card></Card>
-      <Header></Header>
-      <Meals></Meals>
+      {cardshow && <Card close={hidecard} />}
+      <Header onshow={showcard}></Header>
+      <main>
+        <Meals></Meals>
+      </main>
     </Fragment>
   );
 }

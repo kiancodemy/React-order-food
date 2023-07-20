@@ -20,7 +20,7 @@ const Cart = (props) => {
       <div className={classes.actions}>
         <button
           onClick={() => {
-            props.hide();
+            props.close();
           }}
           className={classes["button--alt"]}
         >
