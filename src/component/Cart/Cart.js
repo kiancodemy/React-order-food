@@ -2,22 +2,33 @@ import classes from "./Cart.module.css";
 import Modal from "../UI/Modal";
 import { useContext } from "react";
 import { Book } from "../../store/context";
+import CartItem from "./CartItem";
 
 const Cart = (props) => {
   const { items, totalamout } = useContext(Book);
   const total = `$${totalamout.toFixed(2)}`;
   const hasitem = items.length > 0;
-  const cartItems = (
+  const onRemove = () => {};
+  const onAdd = () => {};
+
+  const cartItem = (
     <ul className={classes["cart-items"]}>
-      {items.map((a) => (
-        <li key={a.name}>{a.name}</li>
+      {items.map((item) => (
+        <CartItem
+          key={item.id}
+          name={item.name}
+          amount={item.amount}
+          price={item.price}
+          onRemove={onRemove}
+          onAdd={onAdd}
+        />
       ))}
     </ul>
   );
 
   return (
     <Modal close={props.close}>
-      {cartItems}
+      {cartItem}
       <div className={classes.total}>
         <span>Total Amount</span>
         <span>{total}</span>
