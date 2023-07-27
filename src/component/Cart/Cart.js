@@ -8,8 +8,11 @@ const Cart = (props) => {
   const { items, totalamout } = useContext(Book);
   const total = `$${totalamout.toFixed(2)}`;
   const hasitem = items.length > 0;
+  const { add } = useContext(Book);
   const onRemove = () => {};
-  const onAdd = () => {};
+  const onAdd = (item) => {
+    add({ ...item, amount: 1 });
+  };
 
   const cartItem = (
     <ul className={classes["cart-items"]}>
@@ -20,7 +23,7 @@ const Cart = (props) => {
           amount={item.amount}
           price={item.price}
           onRemove={onRemove}
-          onAdd={onAdd}
+          onAdd={onAdd.bind(null, item)}
         />
       ))}
     </ul>

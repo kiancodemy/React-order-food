@@ -25,6 +25,8 @@ const cartreducer = (state, action) => {
     return { items: updateditems, totalamout: updateamount };
   }
   if (action.type === "remove") {
+    const existingitem = state.items.findIndex((item) => item.id === action.id);
+    const existingcard = state.items[existingitem];
   }
 };
 export const Book = createContext();
