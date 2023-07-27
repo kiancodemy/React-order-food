@@ -2,6 +2,8 @@ import { createContext } from "react";
 import { useReducer } from "react";
 const defaultt = { items: [], totalamout: 0 };
 const cartreducer = (state, action) => {
+  let updateditem;
+  let updateditems;
   if (action.type === "add") {
     const updateamount =
       state.totalamout + action.item.price * action.item.amount;
@@ -27,6 +29,20 @@ const cartreducer = (state, action) => {
   if (action.type === "remove") {
     const existingitem = state.items.findIndex((item) => item.id === action.id);
     const existingcard = state.items[existingitem];
+    let updateamount = state.totalamout - existingcard.price;
+    if (existingcard.amount === 1) {
+      updateditems = state.items.filter((item) => {
+        return item.id !== action.id;
+      });
+    } else {
+      let update = { ...existingcard, amount: existingcard.amount - 1 };
+      updateditems = [...state.items];
+      updateditems[existingitem] = update;
+    }
+    return {
+      items: updateditems,
+      totalamout: updateamount,
+    };
   }
 };
 export const Book = createContext();
